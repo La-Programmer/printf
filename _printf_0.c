@@ -91,7 +91,6 @@ int _printf(const char *format, ...)
 		}
 		else
 			_putchar(format[counter]);
-		result++;
 	}
 	va_end(args);
 	return (result);
