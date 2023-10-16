@@ -57,7 +57,9 @@ int count_args(const char *format)
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int len = count(format), counter = 0;
+	unsigned int len = count(format), counter = 0;
+	unsigned int arg_count = count_args(format), add = 0;
+	char c, *str;
 
 	va_start(args, format);
 	while (format[counter] != '\0')
@@ -67,19 +69,22 @@ int _printf(const char *format, ...)
 			switch (format[counter + 1])
 			{
 			case 'c':
-				_putchar(va_arg(args, int));
+				c = va_arg(args, int);
+				add += _putchar(c);
 				counter++;
 				break;
 			case 's':
-				_puts(va_arg(args, char *));
+				str = va_arg(args, char *);
+				add += _puts(str);
 				counter++;
 				break;
 			case '%':
 				_putchar('%');
+				add += 1;
 				counter++;
 				break;
 			default:
-				_puts("ERROR: Expected specifier after %");
+				_puts("ERROR: Unsupported specifier");
 				exit(90);
 			}
 		}
@@ -88,6 +93,5 @@ int _printf(const char *format, ...)
 
 		counter++;
 	}
-
-	return (len);
+	return (len - (arg_count * 2) + add);
 }

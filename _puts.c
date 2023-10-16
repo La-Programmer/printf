@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <stdlib.h>
 #include "main.h"
 /**
@@ -5,7 +6,7 @@
 * @str: String to be printed
 * Return: Nothing
 */
-void _puts(char *str)
+int _puts(char *str)
 {
 	int count = 0;
 
@@ -16,4 +17,6 @@ void _puts(char *str)
 		_putchar(str[count]);
 		count++;
 	}
+
+	return (count);
 }
