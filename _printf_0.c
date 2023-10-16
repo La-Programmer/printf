@@ -10,7 +10,7 @@ int count(const char *str)
 {
 	int counter = 0;
 
-	while (str[counter] != '\0')
+	while (str[counter] != '\0' && str != NULL)
 		counter++;
 
 	return (counter);
@@ -26,7 +26,7 @@ int count_args(const char *format)
 {
 	int arg_count = 0, counter = 0;
 
-	while (format[counter] != '\0')
+	while (format[counter] != '\0' && format != NULL)
 	{
 		if (format[counter] == '%')
 		{
@@ -57,44 +57,42 @@ int count_args(const char *format)
 int _printf(const char *format, ...)
 {
 	va_list args;
-	unsigned int len = count(format), counter = 0;
-	unsigned int arg_count = count_args(format), add = 0;
-	char c, *str;
+	unsigned int counter, result = 0;
+	char c, *str, *null_str = "(null)";
 
-
-	if (format != NULL)
-		va_start(args, format);
-	while (format[counter] != '\0' && format != NULL)
+	if (format == NULL)
+		return (-1);
+	va_start(args, format);
+	for (counter = 0; format[counter] != '\0' && format != NULL; counter++)
 	{
 		if (format[counter] == '%')
 		{
-			switch (format[counter + 1])
+			counter++;
+			if (format[counter] == '%')
 			{
-			case 'c':
-				c = va_arg(args, int);
-				add += _putchar(c);
-				counter++;
-				break;
-			case 's':
-				str = va_arg(args, char *);
-				add += _puts(str);
-				counter++;
-				break;
-			case '%':
 				_putchar('%');
-				add += 1;
-				counter++;
-				break;
-			default:
-				_puts("ERROR: Unsupported specifier");
-				exit(90);
+				result += 1;
+			}
+			else if (format[counter] == 'c')
+			{
+				c = va_arg(args, int);
+				_putchar(c);
+				if (c)
+					result += 1;
+			}
+			else if (format[counter] == 's')
+			{
+				str = va_arg(args, char *);
+				if (str)
+					result += _puts(str);
+				else
+					result += (_puts(null_str) - 1);
 			}
 		}
 		else
 			_putchar(format[counter]);
-
-		counter++;
+		result++;
 	}
 	va_end(args);
-	return (len - (arg_count * 2) + add);
+	return (result);
 }
