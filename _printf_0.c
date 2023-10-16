@@ -10,7 +10,7 @@ int count(const char *str)
 {
 	int counter = 0;
 
-	while (str[counter] != '\0' && str != NULL)
+	while (str != NULL && str[counter] != '\0')
 		counter++;
 
 	return (counter);
@@ -26,7 +26,7 @@ int count_args(const char *format)
 {
 	int arg_count = 0, counter = 0;
 
-	while (format[counter] != '\0' && format != NULL)
+	while (format[counter] != NULL && format[counter] != '\0')
 	{
 		if (format[counter] == '%')
 		{
@@ -87,6 +87,11 @@ int _printf(const char *format, ...)
 					result += _puts(str);
 				else
 					result += (_puts(null_str));
+			}
+			else
+			{
+				_puts("ERROR: Unsupported specifier");
+				return (-1);
 			}
 		}
 		else
