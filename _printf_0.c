@@ -93,5 +93,6 @@ int _printf(const char *format, ...)
 
 		counter++;
 	}
+	va_end(args);
 	return (len - (arg_count * 2) + add);
 }
