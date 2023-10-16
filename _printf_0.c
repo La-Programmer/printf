@@ -86,11 +86,14 @@ int _printf(const char *format, ...)
 				if (str)
 					result += _puts(str);
 				else
-					result += (_puts(null_str) - 1);
+					result += (_puts(null_str));
 			}
 		}
 		else
+		{
 			_putchar(format[counter]);
+			result++;
+		}
 	}
 	va_end(args);
 	return (result);
