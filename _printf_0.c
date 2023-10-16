@@ -26,7 +26,7 @@ int count_args(const char *format)
 {
 	int arg_count = 0, counter = 0;
 
-	while (format[counter] != NULL && format[counter] != '\0')
+	while (format != NULL && format[counter] != '\0')
 	{
 		if (format[counter] == '%')
 		{
