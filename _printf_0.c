@@ -10,7 +10,7 @@ int count(const char *str)
 {
 	int counter = 0;
 
-	while (str != NULL && str[counter] != '\0')
+	while (str[counter] != '\0' && str != NULL)
 		counter++;
 
 	return (counter);
@@ -26,7 +26,7 @@ int count_args(const char *format)
 {
 	int arg_count = 0, counter = 0;
 
-	while (format != NULL && format[counter] != '\0')
+	while (format[counter] != '\0' && format != NULL)
 	{
 		if (format[counter] == '%')
 		{
