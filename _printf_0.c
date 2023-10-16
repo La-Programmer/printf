@@ -61,7 +61,8 @@ int _printf(const char *format, ...)
 	unsigned int arg_count = count_args(format), add = 0;
 	char c, *str;
 
-	va_start(args, format);
+	if (format != NULL)
+		va_start(args, format);
 	while (format[counter] != '\0' && format != NULL)
 	{
 		if (format[counter] == '%')
