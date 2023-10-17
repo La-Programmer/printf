@@ -88,11 +88,6 @@ int _printf(const char *format, ...)
 				else
 					result += (_puts(null_str));
 			}
-			else
-			{
-				_puts("ERROR: Unsupported specifier");
-				return (-1);
-			}
 		}
 		else
 		{
