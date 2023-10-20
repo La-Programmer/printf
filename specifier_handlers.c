@@ -39,11 +39,21 @@ int char_handler(va_list list, char *buffer, unsigned int buffer_count)
 */
 int decimal_handler(va_list list, char *buffer, unsigned int buffer_count)
 {
-	int number = va_arg(list, int);
-	int len = num_len(number) + 1;
-	char *str = malloc(len * sizeof(char));
+	int number = va_arg(list, int), len = num_len(number) + 1;
+	unsigned int result;
+	char *str;
 
+	if (number < 0)
+		str = malloc((len + 1) * sizeof(char));
+	else
+		str = malloc(len * sizeof(char));
+
+	if (str == NULL)
+		return (-1);
 	_itoa(number, str);
 
-	return (buffer_handler(buffer, buffer_count, str));
+	result = (buffer_handler(buffer, buffer_count, str));
+	free(str);
+
+	return (result);
 }
