@@ -11,6 +11,8 @@ int (*get_handler(char specifier))(va_list, char *, unsigned int)
 	hd handlers[] = {
 		{'c', char_handler},
 		{'s', string_handler},
+		{'i', decimal_handler},
+		{'d', decimal_handler},
 		{0, NULL}
 	};
 	int counter = 0;

@@ -29,3 +29,21 @@ int char_handler(va_list list, char *buffer, unsigned int buffer_count)
 	str[1] = '\0';
 	return (buffer_handler(buffer, buffer_count, str));
 }
+
+/**
+* decimal_handler - Handles decimal specifier
+* @list: Variadic list
+* @buffer: Buffer
+* @buffer_count: Buffer count
+* Return: Buffer count
+*/
+int decimal_handler(va_list list, char *buffer, unsigned int buffer_count)
+{
+	int number = va_arg(list, int);
+	int len = num_len(number) + 1;
+	char *str = malloc(len * sizeof(char));
+
+	_itoa(number, str);
+
+	return (buffer_handler(buffer, buffer_count, str));
+}
