@@ -3,7 +3,7 @@
 #include <stdlib.h>
 /**
 * get_handler - Handles the selection of appropriate specifier functions
-* @s: Specifier character.
+* @specifier: Specifier character.
 * Return: Function pointer to appropriate specifier function
 */
 int (*get_handler(char specifier))(va_list, char *, unsigned int)
